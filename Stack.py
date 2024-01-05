@@ -5,8 +5,16 @@ class ArrayStack:
         self.data = []
     def push(self, input_data):
         """stack"""
-        self.data.append(input_data)
-        self.size += 1
+        try:
+            if input_data.isdigit():
+                input_data = int(input_data)
+            elif input_data.replace(".", "", 1).isdigit():
+                input_data = float(input_data)
+        except (TypeError, ValueError, ArithmeticError, AttributeError):
+            pass
+        finally:
+            self.data.append(input_data)
+            self.size += 1
     def pop(self):
         if self.size == 0:
             print("Underflow: Cannot pop data from an empty list")
@@ -21,7 +29,7 @@ class ArrayStack:
             return False
     def get_stack_top(self):
         if self.size == 0:
-            print("Underflow: Cannot pop data from an empty list")
+            print("Underflow: Cannot get stack top from an empty list")
             return None
         else: 
             return self.size
